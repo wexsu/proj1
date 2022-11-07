@@ -11,6 +11,10 @@ int global_in = 10; //data segment
 int global_nin; //BSS segment
 int *heap; //heap segment
 void *libraries; //libraries
+void text() //text 
+{
+    printf( "hello\n");
+}
 
 long get_addresss( void *addr )
 {
@@ -21,12 +25,13 @@ void *child( void *arg )
 {
     int local = 123;
     int *id = arg;
-/*
+/*    
     printf( "This is thread %d:\n", *id );
     printf( "[global_in] vaddr: %p, paddr:  --data\n", &global_in );
     printf( "[global_nin] vaddr: %p, paddr:  --BSS\n", &global_nin );
     printf( "[heap] vaddr: %p, paddr:  --heap\n", &heap );
-    printf( "[libraries] vaddr: %p, paddr: %p  --libraries\n", libraries );
+    printf( "[libraries] vaddr: %p, paddr:  --libraries\n", libraries );
+    printf( "[text] vaddr: %p, paddr:  --text\n", &text );
     printf( "[local] vaddr: %p, paddr:  --stack\n", &local );
     printf( "\n" );
 */
@@ -36,6 +41,7 @@ void *child( void *arg )
     printf( "[global_nin] vaddr: %p, paddr: %p --BSS\n", &global_nin, (void *)get_address( &global_nin ) );
     printf( "[heap] vaddr: %p, paddr: %p --heap\n", &heap, (void *)get_address( &heap ) );
     printf( "[libraries] vaddr: %p, paddr: %p  --libraries\n", &libraries, (void *)get_address( &libraries ) );
+    printf( "[text] vaddr: %p, paddr: %p --text\n", &text, (void *)get_addres( &text ) );
     printf( "[local] vaddr: %p, paddr: %p --stack\n", &local, (void *)get_address( &local ) );
     printf( "\n" );
 
